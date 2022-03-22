@@ -5,14 +5,13 @@ metadata:
 spec:
   capacity:
     storage: 5Gi
-  accessModes: 
+  accessModes:
   - ReadWriteOnce
   persistentVolumeReclaimPolicy: Recycle
   storageClassName: "redis-cluster"
-  nfs:
-    path: /data/pv1
-    server: 10.0.0.11
----  
+  hostPath:
+      path: /tmp/alu_pv1
+---
 apiVersion: v1
 kind: PersistentVolume
 metadata:
@@ -20,13 +19,12 @@ metadata:
 spec:
   capacity:
     storage: 5Gi
-  accessModes: 
+  accessModes:
   - ReadWriteOnce
   persistentVolumeReclaimPolicy: Recycle
   storageClassName: "redis-cluster"
-  nfs:
-    path: /data/pv2
-    server: 10.0.0.11
+  hostPath:
+      path: /tmp/alu_pv2
 ---
 apiVersion: v1
 kind: PersistentVolume
@@ -35,13 +33,12 @@ metadata:
 spec:
   capacity:
     storage: 5Gi
-  accessModes: 
+  accessModes:
   - ReadWriteOnce
   persistentVolumeReclaimPolicy: Recycle
   storageClassName: "redis-cluster"
-  nfs:
-    path: /data/pv3
-    server: 10.0.0.11
+  hostPath:
+      path: /tmp/alu_pv3
 ---
 apiVersion: v1
 kind: PersistentVolume
@@ -50,13 +47,12 @@ metadata:
 spec:
   capacity:
     storage: 5Gi
-  accessModes: 
+  accessModes:
   - ReadWriteOnce
   persistentVolumeReclaimPolicy: Recycle
   storageClassName: "redis-cluster"
-  nfs:
-    path: /data/pv4
-    server: 10.0.0.11
+  hostPath:
+      path: /tmp/alu_pv4
 ---
 apiVersion: v1
 kind: PersistentVolume
@@ -65,13 +61,12 @@ metadata:
 spec:
   capacity:
     storage: 5Gi
-  accessModes: 
+  accessModes:
   - ReadWriteOnce
   persistentVolumeReclaimPolicy: Recycle
   storageClassName: "redis-cluster"
-  nfs:
-    path: /data/pv5
-    server: 10.0.0.11
+  hostPath:
+      path: /tmp/alu_pv5
 ---
 apiVersion: v1
 kind: PersistentVolume
@@ -84,6 +79,47 @@ spec:
   - ReadWriteOnce
   persistentVolumeReclaimPolicy: Recycle
   storageClassName: "redis-cluster"
-  nfs:
-    path: /data/pv6
-    server: 10.0.0.11
+  hostPath:
+      path: /tmp/alu_pv6
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: redis-pv7
+spec:
+  capacity:
+    storage: 5Gi
+  accessModes:
+  - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Recycle
+  storageClassName: "redis-cluster"
+  hostPath:
+      path: /tmp/alu_pv7
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: redis-pv8
+spec:
+  capacity:
+    storage: 5Gi
+  accessModes:
+  - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Recycle
+  storageClassName: "redis-cluster"
+  hostPath:
+      path: /tmp/alu_pv8
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: redis-pv9
+spec:
+  capacity:
+    storage: 5Gi
+  accessModes:
+  - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Recycle
+  storageClassName: "redis-cluster"
+  hostPath:
+      path: /tmp/alu_pv9

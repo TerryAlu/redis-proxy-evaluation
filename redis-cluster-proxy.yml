@@ -1,0 +1,65 @@
+#Reference: https://leeguangxing.cn/blog_post_87.html
+---
+apiVersion: v1
+kind: Service
+metadata:
+    name: redis-cluster-proxy
+    labels:
+        role: redis-cluster-proxy
+spec:
+    selector:
+        role: redis-cluster-proxy
+    ports:
+        - port: 7777
+          targetPort: 7777
+          name: proxy
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+    name: redis-proxy-conf
+data:
+    proxy.conf: |+
+        cluster 10.1.74.137:6379
+        bind 0.0.0.0
+        #threads 50
+        #log-level debug
+        #dump-queues yes
+        #logfile "/tmp/proxy.log"
+        connections-pool-size 0
+        max-clients 20000
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: redis-cluster-proxy
+    labels:
+        role: redis-cluster-proxy
+spec:
+    replicas: 1
+    selector:
+        matchLabels:
+            role: redis-cluster-proxy
+    template:
+        metadata:
+            labels:
+                role: redis-cluster-proxy
+        spec:
+            containers:
+                - name: redis-cluster-proxy
+                  image: terryalu/redis-cluster-proxy-root
+                  ports:
+                      - containerPort: 7777
+                  volumeMounts:
+                      - name: conf
+                        mountPath: /data
+                  #command: ["top"]
+                  command: ["redis-cluster-proxy"]
+                  args: ["-c", "/data/proxy.conf"]
+                  #resources:
+                      #limits:
+                          #cpu: 1
+            volumes:
+                - name: conf
+                  configMap:
+                      name: redis-proxy-conf

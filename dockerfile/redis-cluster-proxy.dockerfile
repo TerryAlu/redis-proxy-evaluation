@@ -28,8 +28,8 @@ RUN chown -R app:app /usr/local
 VOLUME /usr/local/etc/redis-cluster-proxy
 VOLUME /usr/local/run/redis-cluster-proxy
 
-# Now run in usermode
-#USER app
+# Run in root mode
+# USER app
 WORKDIR /home/app
 
 ENTRYPOINT ["/usr/local/bin/redis-cluster-proxy"]

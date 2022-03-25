@@ -11,8 +11,8 @@ WORKDIR /predixy-1.0.5
 # fix return type mismtach error
 RUN sed -i "39 s/.*/#if false/" src/Util.h
 # fix no execinfo.h error
-RUN	sed -i "21d" src/Makefile
-RUN	make
+RUN sed -i "21d" src/Makefile
+RUN make
 
 RUN cp src/predixy /tmp/predixy
 RUN cp -r conf /etc

@@ -20,7 +20,7 @@ metadata:
     name: redis-proxy-conf
 data:
     proxy.conf: |+
-        cluster 10.1.74.137:6379
+        cluster redis-cluster:6379
         bind 0.0.0.0
         #threads 50
         #log-level debug
@@ -53,12 +53,8 @@ spec:
                   volumeMounts:
                       - name: conf
                         mountPath: /data
-                  #command: ["top"]
                   command: ["redis-cluster-proxy"]
                   args: ["-c", "/data/proxy.conf"]
-                  #resources:
-                      #limits:
-                          #cpu: 1
             volumes:
                 - name: conf
                   configMap:

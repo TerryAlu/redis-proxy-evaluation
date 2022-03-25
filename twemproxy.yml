@@ -62,9 +62,6 @@ spec:
                         mountPath: /conf
                         readOnly: false
                   command: ["nutcracker", "-c", "/conf/proxy.conf"]
-                  #resources:
-                      #limits:
-                          #cpu: 313m
             volumes:
                 - name: conf
                   configMap:

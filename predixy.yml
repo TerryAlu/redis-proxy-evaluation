@@ -72,11 +72,7 @@ spec:
                       - cp /conf/predixy.conf /etc/conf/predixy.conf &&
                         cp /conf/cluster.conf /etc/conf/cluster.conf &&
                         predixy /etc/conf/predixy.conf
-                  resources:
-                      limits:
-                          cpu: 3
             volumes:
                 - name: conf
                   configMap:
                       name: predixy-conf
-                      defaultMode: 0777

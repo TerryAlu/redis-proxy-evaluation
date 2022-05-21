@@ -20,6 +20,8 @@ Remember to `kubtctl apply` the configuration and `kubectl delete` the proxy pod
 So far, we create three redis servers whose cluster functions are enabled.<br>
 To group the three redis servers as a cluster, we can create a temporary pod to communicate the redis servers.
 
+- Enable microk8s dns addon
+	- microk8s enable dns
 - Create a temporary redis pod
 	- kubectl run myshell --rm -it --image terryalu/redis -- bash
 - Flush and reset cluster settings (optional: you cannot create a cluster if some redis server contains keys)
@@ -27,8 +29,7 @@ To group the three redis servers as a cluster, we can create a temporary pod to 
 	- nslookup redis-cluster | grep Address | grep -v "#53" | cut -d " " -f 2 | xargs -n 1 -i redis-cli -h {} cluster reset
 - Create a redis cluster
 	- redis-cli --cluster create $(echo $(nslookup redis-cluster | grep Address | grep -v "#53" | cut -d " " -f 2 | xargs -i echo {}:6379))
-		- add `--cluster-replicas 1`
-		-  option if you need to create a cluster with slave redis servers
+		- add `--cluster-replicas 1` option if you need to create a cluster with slave redis servers
 
 ## Create redis-cluster-proxy
 
